@@ -1,7 +1,9 @@
 import nodemailer from 'nodemailer';
 
-export const sendEmail = async({email, emailType, userId})=>{
+
+export const sendEmail = async({email, emailType, userId}:any)=>{
     try{
+        
         const transporter = nodemailer.createTransport({
         host: "smtp.ethereal.email",
         port: 587,
@@ -21,10 +23,10 @@ const mailOption = {
     html: "<b>Hello world?</b>", // HTML body
   }
 
-  const mailResponse =  await transporter.sendEmail(mailOption)
+  const mailResponse =  await transporter.sendMail(mailOption)
   return mailResponse;
 
-    }catch(err){
-
+    }catch(error:any){
+        throw new Error(error.message)
     }
 }
